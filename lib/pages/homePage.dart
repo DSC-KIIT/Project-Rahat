@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       }
     });
   }
-
+  // Getting the User
   getUser() async {
     FirebaseUser firebaseUser = await _auth.currentUser();
     await firebaseUser?.reload();
