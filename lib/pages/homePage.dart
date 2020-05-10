@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rahat/auth/googleAuth.dart';
+import 'package:rahat/weather/weather.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,6 +13,27 @@ class _HomePageState extends State<HomePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser user;
   bool isSignedIn = false;
+
+  //Weather Fetching
+  WeatherModel weather = WeatherModel();
+  int temperature;
+  String weatherIcon;
+  String cityName;
+
+  void updateUI(dynamic weatherData) async {
+    setState(() {
+      if (weatherData == null) {
+        temperature = 0;
+        weatherIcon = 'error';
+        cityName = '';
+        return;
+      }
+      temperature = weatherData['main']['temp'];
+      var condition = weatherData['weather'][0]['id'];
+      weatherIcon = weather.getWeatherIcon(condition);
+      cityName = weatherData['name'];
+    });
+  }
 
   checkAuthentication() async {
     _auth.onAuthStateChanged.listen((user) {
@@ -46,6 +68,8 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     this.checkAuthentication();
     this.getUser();
+    var weatherData = weather.getLocationWeather();
+    updateUI(weatherData);
   }
 
   Image appLogo = new Image(
@@ -118,7 +142,17 @@ class _HomePageState extends State<HomePage> {
                 )),
       body: !isSignedIn
           ? Center(child: CircularProgressIndicator())
-          : Container(),
+          : Container(
+              child: Text(
+                "$temperature °C",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Roboto",
+                  fontSize: 40,
+                ),
+              ),
+            ),
     );
   }
 }
