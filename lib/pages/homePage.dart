@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rahat/auth/googleAuth.dart';
 
 class HomePage extends StatefulWidget {
@@ -63,10 +64,61 @@ class _HomePageState extends State<HomePage> {
         title: appLogo,
         centerTitle: true,
       ),
+      drawer: Drawer(
+          child: !isSignedIn
+              ? CircularProgressIndicator()
+              : ListView(
+                  children: <Widget>[
+                    UserAccountsDrawerHeader(
+                      accountName: Text(
+                        '${user.displayName}',
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      accountEmail: Text(
+                        '${user.email}',
+                        style: TextStyle(fontSize: 13, color: Colors.white),
+                      ),
+                      decoration: BoxDecoration(color: Color(0xFF183E8D)),
+                      currentAccountPicture: CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          radius: 50,
+                          backgroundImage: user.photoUrl != null
+                              ? NetworkImage(user.photoUrl)
+                              : AssetImage("assets/rahatori.png")),
+                    ),
+                    ListTile(
+                      title: Text("Profile"),
+                      trailing: Icon(FontAwesomeIcons.user),
+                      onTap: () {},
+                    ),
+                    ListTile(
+                      title: Text("NASA Portal"),
+                      trailing: Icon(FontAwesomeIcons.rocket),
+                      onTap: () {},
+                    ),
+                    ListTile(
+                      title: Text("News"),
+                      trailing: Icon(FontAwesomeIcons.newspaper),
+                      onTap: () {},
+                    ),
+                    ListTile(
+                      title: Text("Logout"),
+                      trailing: Icon(FontAwesomeIcons.signOutAlt),
+                      onTap: () => signOut(),
+                    ),
+                    Divider(),
+                    ListTile(
+                      title: Text("Close"),
+                      trailing: Icon(Icons.close),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                )),
       body: !isSignedIn
           ? Center(child: CircularProgressIndicator())
           : Container(),
-      floatingActionButton: FloatingActionButton(onPressed: () => signOut()),
     );
   }
 }
