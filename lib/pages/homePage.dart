@@ -143,16 +143,21 @@ class _HomePageState extends State<HomePage> {
       body: !isSignedIn
           ? Center(child: CircularProgressIndicator())
           : Container(
-              child: Text(
-                "$temperature °C",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Roboto",
-                  fontSize: 40,
-                ),
-              ),
-            ),
+              child: temperature == null
+                  ? FlatButton(
+                      onPressed: () async {
+                        var weatherData = await weather.getLocationWeather();
+                        updateUI(weatherData);
+                      },
+                      child: Icon(Icons.add))
+                  : Text(
+                      '$temperature °C\n$cityName $weatherIcon',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold
+                      ),
+                    )),
     );
   }
 }
