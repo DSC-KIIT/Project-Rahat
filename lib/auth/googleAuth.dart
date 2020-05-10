@@ -108,6 +108,7 @@ class _GoogleAuthState extends State<GoogleAuth> {
     );
   }
 
+  //UI of the page
   @override
   Widget build(BuildContext context) {
     return Scaffold(
