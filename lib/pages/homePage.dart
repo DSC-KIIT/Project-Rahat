@@ -149,9 +149,9 @@ class _HomePageState extends State<HomePage> {
                         var weatherData = await weather.getLocationWeather();
                         updateUI(weatherData);
                       },
-                      child: Icon(Icons.add))
+                      child: Icon(Icons.add_circle_outline))
                   : Text(
-                      '$temperature °C\n$cityName $weatherIcon',
+                      '$temperature °C\n$cityName $weatherIcon\n${user.displayName}',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 25,
