@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
       }
     });
   }
+
   // Getting the User
   getUser() async {
     FirebaseUser firebaseUser = await _auth.currentUser();
@@ -90,75 +91,130 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       drawer: Drawer(
-          child: !isSignedIn
-              ? CircularProgressIndicator()
-              : ListView(
-                  children: <Widget>[
-                    UserAccountsDrawerHeader(
-                      accountName: Text(
-                        '${user.displayName}',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
+        child: !isSignedIn
+            ? CircularProgressIndicator()
+            : ListView(
+                children: <Widget>[
+                  UserAccountsDrawerHeader(
+                    accountName: Text(
+                      '${user.displayName}',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                    accountEmail: Text(
+                      '${user.email}',
+                      style: TextStyle(fontSize: 13, color: Colors.white),
+                    ),
+                    decoration: BoxDecoration(color: Color(0xFF183E8D)),
+                    currentAccountPicture: CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        radius: 50,
+                        backgroundImage: user.photoUrl != null
+                            ? NetworkImage(user.photoUrl)
+                            : AssetImage("assets/rahatori.png")),
+                  ),
+                  ListTile(
+                    title: Text("Profile"),
+                    trailing: Icon(FontAwesomeIcons.user),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("NASA Portal"),
+                    trailing: Icon(FontAwesomeIcons.rocket),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("News"),
+                    trailing: Icon(FontAwesomeIcons.newspaper),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: Text("Logout"),
+                    trailing: Icon(FontAwesomeIcons.signOutAlt),
+                    onTap: () => signOut(),
+                  ),
+                  Divider(),
+                  ListTile(
+                    title: Text("Close"),
+                    trailing: Icon(Icons.close),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+      ),
+      body: Column(
+        children: <Widget>[
+          !isSignedIn
+              ? Center(child: CircularProgressIndicator())
+              : Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Container(
+                    height: 200,
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.grey,
+                    child: temperature == null
+                        ? FlatButton(
+                            onPressed: () async {
+                              var weatherData =
+                                  await weather.getLocationWeather();
+                              updateUI(weatherData);
+                            },
+                            child: Icon(Icons.add_circle_outline),
+                          )
+                        : Text(
+                            '$temperature °C\n$cityName $weatherIcon\n${user.displayName}',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold),
+                          ),
+                  ),
+                ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              height: 180.0,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/nasa.png',
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ClipOval(
+                child: Material(
+                  color: Colors.red, // button color
+                  child: InkWell(
+                    splashColor: Colors.red, // inkwell color
+                    child: SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          'SOS',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 40.0,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ),
-                      accountEmail: Text(
-                        '${user.email}',
-                        style: TextStyle(fontSize: 13, color: Colors.white),
-                      ),
-                      decoration: BoxDecoration(color: Color(0xFF183E8D)),
-                      currentAccountPicture: CircleAvatar(
-                          backgroundColor: Colors.transparent,
-                          radius: 50,
-                          backgroundImage: user.photoUrl != null
-                              ? NetworkImage(user.photoUrl)
-                              : AssetImage("assets/rahatori.png")),
                     ),
-                    ListTile(
-                      title: Text("Profile"),
-                      trailing: Icon(FontAwesomeIcons.user),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      title: Text("NASA Portal"),
-                      trailing: Icon(FontAwesomeIcons.rocket),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      title: Text("News"),
-                      trailing: Icon(FontAwesomeIcons.newspaper),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      title: Text("Logout"),
-                      trailing: Icon(FontAwesomeIcons.signOutAlt),
-                      onTap: () => signOut(),
-                    ),
-                    Divider(),
-                    ListTile(
-                      title: Text("Close"),
-                      trailing: Icon(Icons.close),
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                    )
-                  ],
-                )),
-      body: !isSignedIn
-          ? Center(child: CircularProgressIndicator())
-          : Container(
-              child: temperature == null
-                  ? FlatButton(
-                      onPressed: () async {
-                        var weatherData = await weather.getLocationWeather();
-                        updateUI(weatherData);
-                      },
-                      child: Icon(Icons.add_circle_outline))
-                  : Text(
-                      '$temperature °C\n$cityName $weatherIcon\n${user.displayName}',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold
-                      ),
-                    )),
+                    onTap: () {},
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
