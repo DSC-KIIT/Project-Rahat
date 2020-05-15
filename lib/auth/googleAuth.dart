@@ -91,7 +91,7 @@ class _GoogleAuthState extends State<GoogleAuth> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("assets/google_logo.png"), height: 20.0),
+            Image(image: AssetImage("assets/images/google_logo.png"), height: 20.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
@@ -117,7 +117,7 @@ class _GoogleAuthState extends State<GoogleAuth> {
           child: Stack(children: <Widget>[
             Align(
               alignment: Alignment.center,
-              child: Image.asset('assets/rahatori.png')),
+              child: Image.asset('assets/images/rahatori.png')),
             Padding(
               padding: const EdgeInsets.only(bottom: 200.0),
               child: Align(

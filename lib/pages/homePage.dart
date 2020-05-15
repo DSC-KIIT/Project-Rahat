@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Image appLogo = new Image(
-      image: new ExactAssetImage("assets/rahatori.png"),
+      image: new ExactAssetImage("assets/images/rahatori.png"),
       height: 100.0,
       width: 100.0,
       alignment: FractionalOffset.center);
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                         radius: 50,
                         backgroundImage: user.photoUrl != null
                             ? NetworkImage(user.photoUrl)
-                            : AssetImage("assets/rahatori.png")),
+                            : AssetImage("assets/images/rahatori.png")),
                   ),
                   ListTile(
                     title: Text("Profile"),
@@ -143,78 +143,91 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
       ),
-      body: Column(
-        children: <Widget>[
-          !isSignedIn
-              ? Center(child: CircularProgressIndicator())
-              : Padding(
+      body: !isSignedIn
+          ? Center(child: Image.asset('assets/gif/animator.gif'))
+          : Column(
+              children: <Widget>[
+                !isSignedIn
+                    ? Center(child: CircularProgressIndicator())
+                    : Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Container(
+                          height: 200,
+                          width: MediaQuery.of(context).size.width,
+                          //color: Colors.grey,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                'assets/images/weather.jpeg',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: temperature == null
+                              ? FlatButton(
+                                  onPressed: () async {
+                                    var weatherData =
+                                        await weather.getLocationWeather();
+                                    updateUI(weatherData);
+                                  },
+                                  child:
+                                      Icon(Icons.add_circle_outline, size: 75, color: Colors.white),
+                                )
+                              : Center(
+                                child: Text(
+                                    '$temperature °C\n$cityName $weatherIcon\n${user.displayName}',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                              ),
+                        ),
+                      ),
+                Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Container(
-                    height: 200,
+                    height: 180.0,
                     width: MediaQuery.of(context).size.width,
-                    color: Colors.grey,
-                    child: temperature == null
-                        ? FlatButton(
-                            onPressed: () async {
-                              var weatherData =
-                                  await weather.getLocationWeather();
-                              updateUI(weatherData);
-                            },
-                            child: Icon(Icons.add_circle_outline),
-                          )
-                        : Text(
-                            '$temperature °C\n$cityName $weatherIcon\n${user.displayName}',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                          'assets/images/nasa.png',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ClipOval(
+                      child: Material(
+                        color: Colors.red, // button color
+                        child: InkWell(
+                          splashColor: Colors.red, // inkwell color
+                          child: SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: Center(
+                              child: Text(
+                                'SOS',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 40.0,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
                           ),
-                  ),
-                ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              height: 180.0,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    'assets/nasa.png',
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ClipOval(
-                child: Material(
-                  color: Colors.red, // button color
-                  child: InkWell(
-                    splashColor: Colors.red, // inkwell color
-                    child: SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: Center(
-                        child: Text(
-                          'SOS',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 40.0,
-                              fontWeight: FontWeight.w500),
+                          onTap: () {},
                         ),
                       ),
                     ),
-                    onTap: () {},
                   ),
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
