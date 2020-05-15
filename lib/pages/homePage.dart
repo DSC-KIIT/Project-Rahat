@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.of(context)
                           .push(new MaterialPageRoute(builder: (context) {
-                        return AccountsPage('${user.displayName}');
+                        return AccountsPage();
                       }));
                     },
                   ),
