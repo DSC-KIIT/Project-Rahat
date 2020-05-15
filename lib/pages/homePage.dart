@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rahat/auth/googleAuth.dart';
+import 'package:rahat/pages/profile/account.dart';
 import 'package:rahat/weather/weather.dart';
 
 class HomePage extends StatefulWidget {
@@ -115,7 +116,11 @@ class _HomePageState extends State<HomePage> {
                   ListTile(
                     title: Text("Profile"),
                     trailing: Icon(FontAwesomeIcons.user),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(new MaterialPageRoute(builder: (context){
+                        return AccountsPage();
+                      }));
+                    },
                   ),
                   ListTile(
                     title: Text("NASA Portal"),
