@@ -117,8 +117,9 @@ class _HomePageState extends State<HomePage> {
                     title: Text("Profile"),
                     trailing: Icon(FontAwesomeIcons.user),
                     onTap: () {
-                      Navigator.of(context).push(new MaterialPageRoute(builder: (context){
-                        return AccountsPage();
+                      Navigator.of(context)
+                          .push(new MaterialPageRoute(builder: (context) {
+                        return AccountsPage('${user.displayName}');
                       }));
                     },
                   ),
@@ -175,18 +176,18 @@ class _HomePageState extends State<HomePage> {
                                         await weather.getLocationWeather();
                                     updateUI(weatherData);
                                   },
-                                  child:
-                                      Icon(Icons.add_circle_outline, size: 75, color: Colors.white),
+                                  child: Icon(Icons.add_circle_outline,
+                                      size: 75, color: Colors.white),
                                 )
                               : Center(
-                                child: Text(
+                                  child: Text(
                                     '$temperature °C\n$cityName $weatherIcon\n${user.displayName}',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 25,
                                         fontWeight: FontWeight.bold),
                                   ),
-                              ),
+                                ),
                         ),
                       ),
                 Padding(
