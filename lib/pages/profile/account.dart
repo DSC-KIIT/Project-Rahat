@@ -16,7 +16,8 @@ class AccountsPage extends StatefulWidget {
 class _AccountsPageState extends State<AccountsPage> {
   String name;
   _AccountsPageState(name);
-  DatabaseReference _databaseReference = FirebaseDatabase.instance.reference();
+  DatabaseReference _databaseReference =
+      FirebaseDatabase.instance.reference().child('Groups/');
 
   navigateToAddPeople() {
     Navigator.of(context)

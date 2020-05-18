@@ -20,39 +20,12 @@ class _AddPeopleState extends State<AddPeople> {
 
   FirebaseUser user;
   DatabaseReference _databaseReference =
-      FirebaseDatabase.instance.reference().child('Users').child('');
+      FirebaseDatabase.instance.reference().child('Users');
 
   String _name = '';
   String _phone = '';
   String _age = '';
   String _photoUrl = "empty";
-
-  saveContact(BuildContext context) async {
-    if (_name.isNotEmpty && _phone.isNotEmpty && _age.isNotEmpty) {
-      People people =
-          People(this._name, this._phone, this._age, this._photoUrl);
-
-      await _databaseReference.push().set(people.toJson());
-      navigateToLastScreen(context);
-    } else {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Empty Fields"),
-              content: Text("Please fill all the fields"),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text("Ok"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
-    }
-  }
 
   navigateToLastScreen(context) {
     Navigator.of(context).pop();
