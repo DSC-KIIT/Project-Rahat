@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rahat/auth/googleAuth.dart';
-import 'package:rahat/pages/profile/account.dart';
+import 'package:rahat/pages/profile/services/account.dart';
 import 'package:rahat/weather/weather.dart';
 
 class HomePage extends StatefulWidget {

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:rahat/custom_widgets/google_add.dart';
@@ -16,8 +17,9 @@ class AccountsPage extends StatefulWidget {
 class _AccountsPageState extends State<AccountsPage> {
   String name;
   _AccountsPageState(name);
+  var firebaseUser = FirebaseAuth.instance.currentUser();
   DatabaseReference _databaseReference =
-      FirebaseDatabase.instance.reference().child('Groups/');
+      FirebaseDatabase.instance.reference().child('Peoples/');
 
   navigateToAddPeople() {
     Navigator.of(context)
