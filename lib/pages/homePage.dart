@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rahat/auth/googleAuth.dart';
+import 'package:rahat/pages/NASA/nasaPage.dart';
+import 'package:rahat/pages/SOS/sosPage.dart';
 import 'package:rahat/pages/profile/services/account.dart';
 import 'package:rahat/weather/weather.dart';
 
@@ -192,15 +194,23 @@ class _HomePageState extends State<HomePage> {
                       ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Container(
-                    height: 180.0,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/nasa.png',
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).push(new MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                return NasaPage();
+                              }));
+                    },
+                    child: Container(
+                      height: 180.0,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            'assets/images/nasa.png',
+                          ),
+                          fit: BoxFit.cover,
                         ),
-                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -211,22 +221,29 @@ class _HomePageState extends State<HomePage> {
                     child: ClipOval(
                       child: Material(
                         color: Colors.red, // button color
-                        child: InkWell(
-                          splashColor: Colors.red, // inkwell color
-                          child: SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: Center(
-                              child: Text(
-                                'SOS',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 40.0,
-                                    fontWeight: FontWeight.w500),
+                        child: GestureDetector(
+                          child: InkWell(
+                            splashColor: Colors.red, // inkwell color
+                            child: SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: Center(
+                                child: Text(
+                                  'SOS',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 40.0,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             ),
+                            onTap: () {
+                              Navigator.of(context).push(new MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                return SOSPage();
+                              }));
+                            },
                           ),
-                          onTap: () {},
                         ),
                       ),
                     ),

@@ -63,6 +63,10 @@ flutter:
     - assets/images/nasa.png
     - assets/images/weather.jpeg
     - assets/images/mascot.png 
+    - assets/images/sos/earthquake.jpg
+    - assets/images/sos/tsunami.png
+    - assets/images/sos/landslide.png
+    - assets/images/sos/flood.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
