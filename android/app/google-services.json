@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "802111134669",
-    "firebase_url": "https://project-rahat.firebaseio.com",
-    "project_id": "project-rahat",
-    "storage_bucket": "project-rahat.appspot.com"
+    "project_number": "902614695687",
+    "firebase_url": "https://rahatapp-cb2c6.firebaseio.com",
+    "project_id": "rahatapp-cb2c6",
+    "storage_bucket": "rahatapp-cb2c6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:802111134669:android:f2b65e6988722795468284",
+        "mobilesdk_app_id": "1:902614695687:android:0001a83fbc275355088fa2",
         "android_client_info": {
           "package_name": "com.example.rahat"
         }
       },
       "oauth_client": [
         {
-          "client_id": "802111134669-cblqm8gsp2jg76c4eupr7e81kfmprb6g.apps.googleusercontent.com",
+          "client_id": "902614695687-f0kom5rdfospu91769uodrh3eonp8tf2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rahat",
+            "certificate_hash": "6db5e7f816dce5fff6af6223d4e326bc66bd0e7c"
+          }
+        },
+        {
+          "client_id": "902614695687-7nhvhrom97qjrmp6tkkvukb660huekrs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA_o-hElOSqpKLKZVPCFMHInAUKzDBVX0U"
+          "current_key": "AIzaSyDy_y9oS-uFtuip03_q8B7kQyVuCBuDP50"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "802111134669-cblqm8gsp2jg76c4eupr7e81kfmprb6g.apps.googleusercontent.com",
+              "client_id": "902614695687-7nhvhrom97qjrmp6tkkvukb660huekrs.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
