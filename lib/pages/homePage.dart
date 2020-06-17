@@ -128,7 +128,11 @@ class _HomePageState extends State<HomePage> {
                   ListTile(
                     title: Text("NASA Portal"),
                     trailing: Icon(FontAwesomeIcons.rocket),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                        return NasaPage();
+                      }));
+                    },
                   ),
                   ListTile(
                     title: Text("News"),
