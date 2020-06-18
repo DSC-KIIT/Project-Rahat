@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rahat/pages/NASA/earthquake.dart';
 import 'package:rahat/pages/profile/screens/addPeople.dart';
+import 'package:rahat/pages/profile/services/account.dart';
 
 class NasaPage extends StatefulWidget {
   @override
@@ -159,7 +160,7 @@ class _NasaPageState extends State<NasaPage> {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AddPeople()));
+                          MaterialPageRoute(builder: (context) => AccountsPage()));
                       {}
                     },
                     child: Container(
