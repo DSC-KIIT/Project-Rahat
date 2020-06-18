@@ -129,7 +129,8 @@ class _HomePageState extends State<HomePage> {
                     title: Text("NASA Portal"),
                     trailing: Icon(FontAwesomeIcons.rocket),
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
                         return NasaPage();
                       }));
                     },
@@ -182,8 +183,14 @@ class _HomePageState extends State<HomePage> {
                                         await weather.getLocationWeather();
                                     updateUI(weatherData);
                                   },
-                                  child: Icon(Icons.add_circle_outline,
-                                      size: 75, color: Colors.white),
+                                  child: Text(
+                                    'Click to check weather',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 )
                               : Center(
                                   child: Text(
@@ -199,21 +206,27 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: GestureDetector(
-                    onTap: (){
-                      Navigator.of(context).push(new MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return NasaPage();
-                              }));
+                    onTap: () {
+                      Navigator.of(context).push(
+                        new MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return NasaPage();
+                          },
+                        ),
+                      );
                     },
-                    child: Container(
-                      height: 180.0,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                            'assets/images/nasa.png',
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 180.0,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              'assets/images/nasa.png',
+                            ),
+                            fit: BoxFit.cover,
                           ),
-                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
@@ -221,7 +234,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(56.0),
                     child: ClipOval(
                       child: Material(
                         color: Colors.red, // button color
@@ -229,8 +242,8 @@ class _HomePageState extends State<HomePage> {
                           child: InkWell(
                             splashColor: Colors.red, // inkwell color
                             child: SizedBox(
-                              width: 100,
-                              height: 100,
+                              width: 130.0,
+                              height: 130.0,
                               child: Center(
                                 child: Text(
                                   'SOS',
@@ -242,10 +255,13 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             onTap: () {
-                              Navigator.of(context).push(new MaterialPageRoute(
+                              Navigator.of(context).push(
+                                new MaterialPageRoute(
                                   builder: (BuildContext context) {
-                                return SOSPage();
-                              }));
+                                    return SOSPage();
+                                  },
+                                ),
+                              );
                             },
                           ),
                         ),
