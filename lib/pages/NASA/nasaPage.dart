@@ -44,9 +44,12 @@ class _NasaPageState extends State<NasaPage> {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => EARTHQUAKE()));
-                      {}},
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EARTHQUAKE()));
+                          {}
+                        },
                         child: Card(
                           shape: RoundedRectangleBorder(
                             side: BorderSide(color: Colors.black, width: 1),
@@ -159,8 +162,10 @@ class _NasaPageState extends State<NasaPage> {
                   padding: const EdgeInsets.all(35.0),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AccountsPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AccountsPage()));
                       {}
                     },
                     child: Container(
@@ -171,9 +176,10 @@ class _NasaPageState extends State<NasaPage> {
                         child: Text(
                           'NEXT',
                           style: TextStyle(
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white),
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
