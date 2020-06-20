@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rahat/pages/NASA/earthquake.dart';
 import 'package:rahat/pages/profile/screens/addPeople.dart';
 import 'package:rahat/pages/profile/services/account.dart';
 
@@ -42,6 +43,14 @@ class _SOSPageState extends State<SOSPage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
+
+                         onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EARTHQUAKE()));
+                          {}
+                        },
                           child: Card(
                             shape: RoundedRectangleBorder(
                               side: BorderSide(color: Colors.black, width: 1),
@@ -57,7 +66,7 @@ class _SOSPageState extends State<SOSPage> {
                                 padding: const EdgeInsets.all(5.0),
                                 child: Text('EARTHQUAKE'),
                               )
-                            ]),
+                            ],),
                           ),
                         ),
                       ),
@@ -72,7 +81,7 @@ class _SOSPageState extends State<SOSPage> {
                             child: Column(children: <Widget>[
                               Container(
                                   height: 110,
-                                  width: 100,
+                                  width: 110,
                                   child: Image.asset(
                                       'assets/images/sos/tsunami.png')),
                               Padding(
