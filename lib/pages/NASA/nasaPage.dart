@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rahat/pages/NASA/earthquake.dart';
-import 'package:rahat/pages/profile/screens/addPeople.dart';
-import 'package:rahat/pages/profile/services/account.dart';
+import 'package:rahat/pages/NASA/flood.dart';
+import 'package:rahat/pages/NASA/landslide.dart';
+import 'package:rahat/pages/NASA/tsunami.dart';
+
+
 
 class NasaPage extends StatefulWidget {
   @override
@@ -58,8 +61,8 @@ class _NasaPageState extends State<NasaPage> {
                           child: Column(
                             children: <Widget>[
                               Container(
-                                  height: 110,
-                                  width: 110,
+                                  height: 150,
+                                  width: 150,
                                   child: Image.asset(
                                       'assets/images/sos/earthquake.jpg')),
                               Padding(
@@ -74,6 +77,13 @@ class _NasaPageState extends State<NasaPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
+                        onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TSUNAMI()));
+                            {}
+                          },
                         child: Card(
                           shape: RoundedRectangleBorder(
                             side: BorderSide(color: Colors.black, width: 1),
@@ -81,8 +91,8 @@ class _NasaPageState extends State<NasaPage> {
                           ),
                           child: Column(children: <Widget>[
                             Container(
-                                height: 110,
-                                width: 110,
+                                height: 150,
+                                width: 150,
                                 child: Image.asset(
                                     'assets/images/sos/tsunami.png')),
                             Padding(
@@ -106,6 +116,13 @@ class _NasaPageState extends State<NasaPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LANDSLIDE()));
+                          {}
+                        },
                         child: Card(
                           shape: RoundedRectangleBorder(
                             side: BorderSide(color: Colors.black, width: 1),
@@ -114,8 +131,8 @@ class _NasaPageState extends State<NasaPage> {
                           child: Column(
                             children: <Widget>[
                               Container(
-                                  height: 110,
-                                  width: 110,
+                                  height: 150,
+                                  width: 150,
                                   child: Image.asset(
                                       'assets/images/sos/landslide.png')),
                               Padding(
@@ -130,6 +147,11 @@ class _NasaPageState extends State<NasaPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => FLOOD()));
+                          {}
+                        },
                         child: Card(
                           shape: RoundedRectangleBorder(
                             side: BorderSide(color: Colors.black, width: 1),
@@ -138,8 +160,8 @@ class _NasaPageState extends State<NasaPage> {
                           child: Column(
                             children: <Widget>[
                               Container(
-                                  height: 110,
-                                  width: 110,
+                                  height: 150,
+                                  width: 150,
                                   child: Image.asset(
                                       'assets/images/sos/flood.png')),
                               Padding(
@@ -154,38 +176,6 @@ class _NasaPageState extends State<NasaPage> {
                   ],
                 ),
               ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(35.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AccountsPage()));
-                      {}
-                    },
-                    child: Container(
-                      color: Colors.orange,
-                      height: 45.0,
-                      width: 320.0,
-                      child: Center(
-                        child: Text(
-                          'NEXT',
-                          style: TextStyle(
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
             ),
           ],
         ),
