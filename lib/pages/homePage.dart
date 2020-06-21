@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rahat/auth/googleAuth.dart';
 import 'package:rahat/pages/NASA/nasaPage.dart';
 import 'package:rahat/pages/SOS/sosPage.dart';
+import 'package:rahat/pages/person/screen/dashboard.dart';
 import 'package:rahat/pages/profile/services/account.dart';
 import 'package:rahat/weather/weather.dart';
 
@@ -121,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.of(context)
                           .push(new MaterialPageRoute(builder: (context) {
-                        return AccountsPage();
+                        return MeetingNotePage();
                       }));
                     },
                   ),
