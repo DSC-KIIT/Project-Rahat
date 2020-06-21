@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rahat/pages/NASA/earthquake.dart';
-import 'package:rahat/pages/profile/screens/addPeople.dart';
 import 'package:rahat/pages/profile/services/account.dart';
 
 class SOSPage extends StatefulWidget {
