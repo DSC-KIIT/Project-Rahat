@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rahat/pages/profile/services/account.dart';
+import 'package:rahat/pages/person/screen/dashboard.dart';
+import 'package:rahat/pages/person/services/firebase.dart';
+
 class LANDSLIDE extends StatefulWidget {
   @override
   _LANDSLIDEState createState() => _LANDSLIDEState();
@@ -183,7 +185,7 @@ class _LANDSLIDEState extends State<LANDSLIDE> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AccountsPage()));
+                                  builder: (context) => AccountPage()));
                           {}
                         },
                         child: Container(

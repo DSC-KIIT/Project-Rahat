@@ -9,16 +9,16 @@ import 'package:rahat/pages/person/screen/personTile.dart';
 import 'package:rahat/pages/person/screen/addPerson.dart';
 import 'package:rahat/pages/person/screen/displayPerson.dart';
 
-class MeetingNotePage extends StatefulWidget {
-  MeetingNotePage({this.uid});
+class AccountPage extends StatefulWidget {
+  AccountPage({this.uid});
 
   String uid;
 
   @override
-  _MeetingNotePageState createState() => new _MeetingNotePageState();
+  _AccountPageState createState() => new _AccountPageState();
 }
 
-class _MeetingNotePageState extends State<MeetingNotePage> {
+class _AccountPageState extends State<AccountPage> {
   List<Person> items;
   StreamSubscription<QuerySnapshot> notePerson;
 

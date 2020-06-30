@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rahat/pages/NASA/earthquake.dart';
-import 'package:rahat/pages/profile/services/account.dart';
+import 'package:rahat/pages/person/screen/dashboard.dart';
+import 'package:rahat/pages/person/services/firebase.dart';
 
 class SOSPage extends StatefulWidget {
   @override
@@ -158,7 +159,7 @@ class _SOSPageState extends State<SOSPage> {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AccountsPage()));
+                          MaterialPageRoute(builder: (context) => AccountPage()));
                       {}
                     },
                     child: Container(
