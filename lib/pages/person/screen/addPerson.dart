@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:rahat/model/person.dart';
 import 'package:rahat/pages/person/services/firebase.dart';
 
-class NoteScreen extends StatefulWidget {
+class AddScreen extends StatefulWidget {
   final Person person;
-  String meetingUid;
-  NoteScreen(this.person, this.meetingUid);
+  String userUid;
+  AddScreen(this.person, this.userUid);
 
   @override
-  State<StatefulWidget> createState() => new _NoteScreenState();
+  State<StatefulWidget> createState() => new _AddScreenState();
 }
 
-class _NoteScreenState extends State<NoteScreen> {
+class _AddScreenState extends State<AddScreen> {
   FirebaseFirestoreService db = new FirebaseFirestoreService();
 
   TextEditingController _nameController;
@@ -85,7 +85,7 @@ class _NoteScreenState extends State<NoteScreen> {
                     padding: EdgeInsets.fromLTRB(100, 20, 100, 20),
                     onPressed: () {
                       if (widget.person.id != null) {
-                        if (widget.meetingUid == null) {
+                        if (widget.userUid == null) {
                           // When this page is called from notes page
                           db
                               .updatePerson(Person(
@@ -100,7 +100,7 @@ class _NoteScreenState extends State<NoteScreen> {
                           // When this page is called from meeting notes page
                           Firestore.instance
                               .collection("users")
-                              .document(widget.meetingUid)
+                              .document(widget.userUid)
                               .collection("person")
                               .document(widget.person.id)
                               .updateData(Person(
@@ -134,11 +134,11 @@ class _NoteScreenState extends State<NoteScreen> {
                                 _medicalController.text.trim())
                             .then((Person n) {
                           // The next two lines are executed when this page is called from meeting notes page as meetingUid != null then
-                          if (widget.meetingUid != null) {
+                          if (widget.userUid != null) {
                             print(n.id);
                             Firestore.instance
                                 .collection("users")
-                                .document(widget.meetingUid)
+                                .document(widget.userUid)
                                 .collection("person")
                                 .document(n.id)
                                 .setData(n.toMap());

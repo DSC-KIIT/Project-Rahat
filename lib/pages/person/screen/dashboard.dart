@@ -34,7 +34,12 @@ class _AccountPageState extends State<AccountPage> {
   ];
 
   Stream<QuerySnapshot> getPersonList({int offset, int limit}) {
-    Stream<QuerySnapshot> snapshots = Firestore.instance.collection("users").document(widget.uid).collection("person").getDocuments().asStream();
+    Stream<QuerySnapshot> snapshots = Firestore.instance
+        .collection("users")
+        .document(widget.uid)
+        .collection("person")
+        .getDocuments()
+        .asStream();
     if (offset != null) {
       snapshots = snapshots.skip(offset);
     }
@@ -97,16 +102,16 @@ class _AccountPageState extends State<AccountPage> {
           crossAxisCount: 4,
           itemCount: items.length,
           itemBuilder: (context, index) => GestureDetector(
-            onLongPress: (){
+            onLongPress: () {
               _showCustomMenu(items[index], index);
             },
             onTapDown: _storePosition,
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => DisplayPerson(
-                    name: items[index].name,
-                    age: items[index].age,
-                  )));
+                        name: items[index].name,
+                        age: items[index].age,
+                      )));
             },
             child: MyTile(
               name: items[index].name,
@@ -129,13 +134,18 @@ class _AccountPageState extends State<AccountPage> {
 
   void _deleteNote(BuildContext context, Person person, int position) async {
     final TransactionHandler deleteTransaction = (Transaction tx) async {
-      final DocumentSnapshot ds = await Firestore.instance.collection("user").document(widget.uid).collection("notes").document(person.id).get();
+      final DocumentSnapshot ds = await Firestore.instance
+          .collection("user")
+          .document(widget.uid)
+          .collection("notes")
+          .document(person.id)
+          .get();
       await tx.delete(ds.reference);
-      return {'deleted' : true};
+      return {'deleted': true};
     };
-    Firestore.instance.runTransaction(deleteTransaction).then((result){
+    Firestore.instance.runTransaction(deleteTransaction).then((result) {
       print(result);
-    }).catchError((error){
+    }).catchError((error) {
       print("Error : $error");
     });
     setState(() {
@@ -146,8 +156,8 @@ class _AccountPageState extends State<AccountPage> {
   void _navigateToUpdatePerson(BuildContext context, Person person) async {
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => NoteScreen(person, widget.uid)),
-    ).then((value){
+      MaterialPageRoute(builder: (context) => AddScreen(person, widget.uid)),
+    ).then((value) {
       populatePerson();
     });
   }
@@ -155,8 +165,10 @@ class _AccountPageState extends State<AccountPage> {
   void _createNewPerson(BuildContext context) async {
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => NoteScreen(Person(null, '', '', ''), widget.uid)),
-    ).then((value){
+      MaterialPageRoute(
+          builder: (context) =>
+              AddScreen(Person(null, '', '', ''), widget.uid)),
+    ).then((value) {
       populatePerson();
     });
   }
@@ -168,7 +180,7 @@ class _AccountPageState extends State<AccountPage> {
     int delta = await showMenu(
       context: context,
       position: RelativeRect.fromRect(
-        _tapPosition & Size(20,20),
+        _tapPosition & Size(20, 20),
         Offset.zero & overlay.semanticBounds.size,
       ),
       items: <PopupMenuEntry<int>>[
@@ -176,16 +188,17 @@ class _AccountPageState extends State<AccountPage> {
         PopupMenuItem(child: Icon(Icons.delete), value: 2),
       ],
     );
-    if(delta == null){
+    if (delta == null) {
       return;
     }
     navigateToPage(context, person, delta, index);
   }
 
-  void navigateToPage(BuildContext context, Person person, int value, int index){
-    if(value == 1){
+  void navigateToPage(
+      BuildContext context, Person person, int value, int index) {
+    if (value == 1) {
       _navigateToUpdatePerson(context, person);
-    }else{
+    } else {
       print(index);
       _deleteNote(context, person, index);
     }
