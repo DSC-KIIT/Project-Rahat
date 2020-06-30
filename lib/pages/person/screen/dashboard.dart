@@ -93,34 +93,24 @@ class _AccountPageState extends State<AccountPage> {
         title: Text('People'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: StaggeredGridView.countBuilder(
-          primary: false,
-          mainAxisSpacing: 6.0,
-          crossAxisSpacing: 6.0,
-          crossAxisCount: 4,
-          itemCount: items.length,
-          itemBuilder: (context, index) => GestureDetector(
-            onLongPress: () {
-              _showCustomMenu(items[index], index);
+      body: StreamBuilder(
+        stream: Firestore.instance
+            .collection("users")
+            .document(widget.uid)
+            .collection("person")
+            .snapshots(),
+        builder: (context, snapshot) {
+          return ListView.builder(
+            itemCount: snapshot.data.documents.length,
+            itemBuilder: (context, index) {
+              DocumentSnapshot details = snapshot.data.documents[index];
+              return ListTile(
+                title: Text(details["name"], style: TextStyle(color: Colors.black),),
+                subtitle: Text(details["age"]),
+              );
             },
-            onTapDown: _storePosition,
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DisplayPerson(
-                        name: items[index].name,
-                        age: items[index].age,
-                      )));
-            },
-            child: MyTile(
-              name: items[index].name,
-              age: items[index].age,
-              color: colors[index % colors.length],
-            ),
-          ),
-          staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-        ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.white,
