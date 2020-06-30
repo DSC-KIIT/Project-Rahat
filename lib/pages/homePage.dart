@@ -5,6 +5,7 @@ import 'package:rahat/auth/googleAuth.dart';
 import 'package:rahat/pages/NASA/nasaPage.dart';
 import 'package:rahat/pages/SOS/sosPage.dart';
 import 'package:rahat/pages/person/screen/dashboard.dart';
+import 'package:rahat/pages/person/services/firebase.dart';
 import 'package:rahat/weather/weather.dart';
 
 class HomePage extends StatefulWidget {
@@ -121,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.of(context)
                           .push(new MaterialPageRoute(builder: (context) {
-                        return AccountPage();
+                        return AccountPage(uid: user.uid);
                       }));
                     },
                   ),
