@@ -151,35 +151,6 @@ class _SOSPageState extends State<SOSPage> {
                 ),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(35.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AccountPage()));
-                      {}
-                    },
-                    child: Container(
-                      color: Colors.orange,
-                      height: 45.0,
-                      width: 320.0,
-                      child: Center(
-                        child: Text(
-                          'NEXT',
-                          style: TextStyle(
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
           ],
         ),
       ),
