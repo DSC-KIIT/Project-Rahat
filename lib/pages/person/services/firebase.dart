@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rahat/model/person.dart';
 
 
@@ -15,8 +16,12 @@ class FirebaseFirestoreService {
   FirebaseFirestoreService.internal();
 
   Future<Person> createPerson(String name, String age, String medical) async {
+    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final userid = user.uid;
+    final CollectionReference myCollection = Firestore.instance.collection('users').document(userid).collection('person');
+
     final TransactionHandler createTransaction = (Transaction tx) async {
-      final DocumentSnapshot ds = await tx.get(personCollection.document());
+      final DocumentSnapshot ds = await tx.get(myCollection.document());
 
       final Person person = new Person(ds.documentID, name, age, medical);
       final Map<String, dynamic> data = person.toMap();
@@ -49,9 +54,13 @@ class FirebaseFirestoreService {
   }
 
   Future<dynamic> updatePerson(Person person) async {
+    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final userid = user.uid;
+    final CollectionReference myCollection = Firestore.instance.collection('users').document(userid).collection('person');
+
     final TransactionHandler updateTransaction = (Transaction tx) async {
       final DocumentSnapshot ds =
-          await tx.get(personCollection.document(person.id));
+          await tx.get(myCollection.document(person.id));
 
       await tx.update(ds.reference, person.toMap());
       return {'updated': true};
