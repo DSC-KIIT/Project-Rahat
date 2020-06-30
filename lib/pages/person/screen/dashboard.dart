@@ -34,7 +34,7 @@ class _MeetingNotePageState extends State<MeetingNotePage> {
   ];
 
   Stream<QuerySnapshot> getPersonList({int offset, int limit}) {
-    Stream<QuerySnapshot> snapshots = Firestore.instance.collection("users").document(widget.uid).collection("notes").getDocuments().asStream();
+    Stream<QuerySnapshot> snapshots = Firestore.instance.collection("users").document(widget.uid).collection("person").getDocuments().asStream();
     if (offset != null) {
       snapshots = snapshots.skip(offset);
     }
