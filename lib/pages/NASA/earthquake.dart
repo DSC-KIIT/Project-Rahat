@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rahat/pages/person/screen/dashboard.dart';
 
 
 class EARTHQUAKE extends StatefulWidget {
