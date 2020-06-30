@@ -43,36 +43,32 @@ class _SOSPageState extends State<SOSPage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
-
-                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EARTHQUAKE()));
-                          {}
-                        },
+                          onTap: () {},
                           child: Card(
                             shape: RoundedRectangleBorder(
                               side: BorderSide(color: Colors.black, width: 1),
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: Column(children: <Widget>[
-                              Container(
-                                  height: 110,
-                                  width: 110,
-                                  child: Image.asset(
-                                      'assets/images/sos/earthquake.jpg')),
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Text('EARTHQUAKE'),
-                              )
-                            ],),
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                    height: 110,
+                                    width: 110,
+                                    child: Image.asset(
+                                        'assets/images/sos/earthquake.jpg')),
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Text('EARTHQUAKE'),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
+                          onTap: () {},
                           child: Card(
                             shape: RoundedRectangleBorder(
                               side: BorderSide(color: Colors.black, width: 1),
@@ -104,6 +100,7 @@ class _SOSPageState extends State<SOSPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
+                        onTap: () {},
                         child: Card(
                           shape: RoundedRectangleBorder(
                             side: BorderSide(color: Colors.black, width: 1),
@@ -126,6 +123,7 @@ class _SOSPageState extends State<SOSPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
+                        onTap: () {},
                         child: Card(
                           shape: RoundedRectangleBorder(
                             side: BorderSide(color: Colors.black, width: 1),
