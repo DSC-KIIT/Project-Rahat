@@ -84,6 +84,10 @@ class _MeetingNotePageState extends State<MeetingNotePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('People'),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: StaggeredGridView.countBuilder(
