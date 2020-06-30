@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rahat/model/person.dart';
 
 
-final CollectionReference personCollection =
-    Firestore.instance.collection('person');
+// final CollectionReference personCollection =
+//     Firestore.instance.collection('person');
 
 class FirebaseFirestoreService {
   static final FirebaseFirestoreService _instance =
@@ -39,19 +39,19 @@ class FirebaseFirestoreService {
     });
   }
 
-  Stream<QuerySnapshot> getPersonList({int offset, int limit}) {
-    Stream<QuerySnapshot> snapshots = personCollection.snapshots();
+  // Stream<QuerySnapshot> getPersonList({int offset, int limit}) {
+  //   Stream<QuerySnapshot> snapshots = personCollection.snapshots();
 
-    if (offset != null) {
-      snapshots = snapshots.skip(offset);
-    }
+  //   if (offset != null) {
+  //     snapshots = snapshots.skip(offset);
+  //   }
 
-    if (limit != null) {
-      snapshots = snapshots.take(limit);
-    }
+  //   if (limit != null) {
+  //     snapshots = snapshots.take(limit);
+  //   }
 
-    return snapshots;
-  }
+  //   return snapshots;
+  // }
 
   Future<dynamic> updatePerson(Person person) async {
     final FirebaseUser user = await FirebaseAuth.instance.currentUser();
@@ -76,8 +76,12 @@ class FirebaseFirestoreService {
   }
 
   Future<dynamic> deletePerson(String id) async {
+    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final userid = user.uid;
+    final CollectionReference myCollection = Firestore.instance.collection('users').document(userid).collection('person');
+
     final TransactionHandler deleteTransaction = (Transaction tx) async {
-      final DocumentSnapshot ds = await tx.get(personCollection.document(id));
+      final DocumentSnapshot ds = await tx.get(myCollection.document(id));
 
       await tx.delete(ds.reference);
       return {'deleted': true};
