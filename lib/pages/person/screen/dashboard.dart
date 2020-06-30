@@ -12,7 +12,7 @@ import 'package:rahat/pages/person/screen/displayPerson.dart';
 class AccountPage extends StatefulWidget {
   AccountPage({this.uid});
 
-  String uid;
+  final String uid;
 
   @override
   _AccountPageState createState() => new _AccountPageState();
@@ -67,7 +67,7 @@ class _AccountPageState extends State<AccountPage> {
 
       setState(() {
         this.items = notes;
-        print(items);
+        // print(items);
       });
     });
   }
