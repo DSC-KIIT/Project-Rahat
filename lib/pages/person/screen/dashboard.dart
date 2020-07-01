@@ -104,12 +104,18 @@ class _AccountPageState extends State<AccountPage> {
             itemCount: snapshot.data.documents.length,
             itemBuilder: (context, index) {
               DocumentSnapshot details = snapshot.data.documents[index];
-              return ListTile(
-                title: Text(
-                  details["name"],
-                  style: TextStyle(color: Colors.black),
+              return GestureDetector(
+                onTap: () {},
+                child: Card(
+                  elevation: 3.0,
+                  child: ListTile(
+                    title: Text(
+                      details["name"],
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    subtitle: Text(details["age"]),
+                  ),
                 ),
-                subtitle: Text(details["age"]),
               );
             },
           );
