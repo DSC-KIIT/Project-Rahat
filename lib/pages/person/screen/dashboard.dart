@@ -21,17 +21,6 @@ class _AccountPageState extends State<AccountPage> {
   List<Person> items;
   StreamSubscription<QuerySnapshot> notePerson;
 
-  List<Color> colors = [
-    Color(0xFFfd6b58),
-    Color(0xFF407BFE),
-    Color(0xFF45C7FE),
-    Color(0xFF645FB3),
-    Color(0xFF7D9EE8),
-    Color(0xFFFF3661),
-    Color(0xFF088BA2),
-    Colors.black87,
-  ];
-
   Stream<QuerySnapshot> getPersonList({int offset, int limit}) {
     Stream<QuerySnapshot> snapshots = Firestore.instance
         .collection("users")
@@ -103,22 +92,29 @@ class _AccountPageState extends State<AccountPage> {
             itemCount: snapshot.data.documents.length,
             itemBuilder: (context, index) {
               DocumentSnapshot details = snapshot.data.documents[index];
-              return GestureDetector(
-                onTap: () {},
-                onLongPress: () {
-                  deletePerson(snapshot.data.documents[index].documentID);
-                },
-                child: Card(
-                  elevation: 3.0,
-                  child: ListTile(
-                    title: Text(
-                      details["name"],
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    subtitle: Text(details["age"]),
-                  ),
-                ),
-              );
+              return details == null
+                  ? Center(
+                      child: Text('Loading...'),
+                    )
+                  : GestureDetector(
+                      onTap: () {
+                        _navigateToUpdatePerson(
+                            context, Person(widget.uid,details["name"], details["age"], details["medical"]));
+                      },
+                      onLongPress: () {
+                        deletePerson(snapshot.data.documents[index].documentID);
+                      },
+                      child: Card(
+                        elevation: 3.0,
+                        child: ListTile(
+                          title: Text(
+                            details["name"],
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          subtitle: Text(details["age"]),
+                        ),
+                      ),
+                    );
             },
           );
         },
@@ -208,6 +204,31 @@ class _AccountPageState extends State<AccountPage> {
   // void _storePosition(TapDownDetails details) {
   //   _tapPosition = details.globalPosition;
   // }
+
+  Future<dynamic> updatePerson(Person person) async {
+    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final userid = user.uid;
+    final CollectionReference myCollection = Firestore.instance
+        .collection('users')
+        .document(widget.uid)
+        .collection('person');
+
+    final TransactionHandler updateTransaction = (Transaction tx) async {
+      final DocumentSnapshot ds =
+          await tx.get(myCollection.document(person.id));
+
+      await tx.update(ds.reference, person.toMap());
+      return {'updated': true};
+    };
+
+    return Firestore.instance
+        .runTransaction(updateTransaction)
+        .then((result) => result['updated'])
+        .catchError((error) {
+      print('error: $error');
+      return false;
+    });
+  }
 
   Future<dynamic> deletePerson(String id) async {
     final FirebaseUser user = await FirebaseAuth.instance.currentUser();

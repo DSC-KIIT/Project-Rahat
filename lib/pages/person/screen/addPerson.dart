@@ -32,7 +32,7 @@ class _AddScreenState extends State<AddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Person'),
+        title: Text('Details of Person'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
