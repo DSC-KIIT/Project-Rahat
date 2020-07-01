@@ -89,19 +89,32 @@ class _AccountPageState extends State<AccountPage> {
                   : GestureDetector(
                       onTap: () {
                         _navigateToUpdatePerson(
-                            context, Person(widget.uid,details["name"], details["age"], details["medical"]));
+                            context,
+                            Person(widget.uid, details["name"], details["age"],
+                                details["medical"]));
                       },
                       onLongPress: () {
                         deletePerson(snapshot.data.documents[index].documentID);
                       },
                       child: Card(
                         elevation: 3.0,
-                        child: ListTile(
-                          title: Text(
-                            details["name"],
-                            style: TextStyle(color: Colors.black),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            title: Text(
+                              details["name"],
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20),
+                            ),
+                            subtitle: Row(
+                              children: <Widget>[
+                                Text(
+                                  details["age"] + "\n" + details["medical"],
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ],
+                            ),
                           ),
-                          subtitle: Text(details["age"]),
                         ),
                       ),
                     );
