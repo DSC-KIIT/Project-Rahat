@@ -105,7 +105,10 @@ class _AccountPageState extends State<AccountPage> {
             itemBuilder: (context, index) {
               DocumentSnapshot details = snapshot.data.documents[index];
               return ListTile(
-                title: Text(details["name"], style: TextStyle(color: Colors.black),),
+                title: Text(
+                  details["name"],
+                  style: TextStyle(color: Colors.black),
+                ),
                 subtitle: Text(details["age"]),
               );
             },
