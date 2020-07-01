@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:rahat/pages/SOS/routes/disasterFour.dart';
+import 'package:rahat/pages/SOS/routes/disasterOne.dart';
+import 'package:rahat/pages/SOS/routes/disasterThree.dart';
+import 'package:rahat/pages/SOS/routes/disasterTwo.dart';
 
 class SOSPage extends StatefulWidget {
   @override
@@ -41,7 +44,12 @@ class _SOSPageState extends State<SOSPage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return DisasterOne();
+                            }));
+                          },
                           child: Card(
                             shape: RoundedRectangleBorder(
                               side: BorderSide(color: Colors.black, width: 1),
@@ -66,7 +74,12 @@ class _SOSPageState extends State<SOSPage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return DisasterTwo();
+                            }));
+                          },
                           child: Card(
                             shape: RoundedRectangleBorder(
                               side: BorderSide(color: Colors.black, width: 1),
@@ -98,7 +111,12 @@ class _SOSPageState extends State<SOSPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return DisasterThree();
+                          }));
+                        },
                         child: Card(
                           shape: RoundedRectangleBorder(
                             side: BorderSide(color: Colors.black, width: 1),
@@ -121,7 +139,12 @@ class _SOSPageState extends State<SOSPage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return DisasterFour();
+                          }));
+                        },
                         child: Card(
                           shape: RoundedRectangleBorder(
                             side: BorderSide(color: Colors.black, width: 1),
