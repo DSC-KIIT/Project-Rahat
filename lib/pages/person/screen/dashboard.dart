@@ -1,13 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:rahat/custom_widgets/google_add.dart';
 import 'package:rahat/model/person.dart';
-import 'package:rahat/pages/person/screen/personTile.dart';
 import 'package:rahat/pages/person/screen/addPerson.dart';
-import 'package:rahat/pages/person/screen/displayPerson.dart';
+import 'package:rahat/pages/person/services/firebase.dart';
 
 class AccountPage extends StatefulWidget {
   AccountPage({this.uid});
@@ -106,6 +105,9 @@ class _AccountPageState extends State<AccountPage> {
               DocumentSnapshot details = snapshot.data.documents[index];
               return GestureDetector(
                 onTap: () {},
+                onLongPress: () {
+                  deletePerson(snapshot.data.documents[index].documentID);
+                },
                 child: Card(
                   elevation: 3.0,
                   child: ListTile(
@@ -131,26 +133,26 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  void _deleteNote(BuildContext context, Person person, int position) async {
-    final TransactionHandler deleteTransaction = (Transaction tx) async {
-      final DocumentSnapshot ds = await Firestore.instance
-          .collection("user")
-          .document(widget.uid)
-          .collection("notes")
-          .document(person.id)
-          .get();
-      await tx.delete(ds.reference);
-      return {'deleted': true};
-    };
-    Firestore.instance.runTransaction(deleteTransaction).then((result) {
-      print(result);
-    }).catchError((error) {
-      print("Error : $error");
-    });
-    setState(() {
-      items.removeAt(position);
-    });
-  }
+  // void _deleteNote(BuildContext context, Person person, int position) async {
+  //   final TransactionHandler deleteTransaction = (Transaction tx) async {
+  //     final DocumentSnapshot ds = await Firestore.instance
+  //         .collection("user")
+  //         .document(widget.uid)
+  //         .collection("notes")
+  //         .document(person.id)
+  //         .get();
+  //     await tx.delete(ds.reference);
+  //     return {'deleted': true};
+  //   };
+  //   Firestore.instance.runTransaction(deleteTransaction).then((result) {
+  //     print(result);
+  //   }).catchError((error) {
+  //     print("Error : $error");
+  //   });
+  //   setState(() {
+  //     items.removeAt(position);
+  //   });
+  // }
 
   void _navigateToUpdatePerson(BuildContext context, Person person) async {
     await Navigator.push(
@@ -172,38 +174,62 @@ class _AccountPageState extends State<AccountPage> {
     });
   }
 
-  var _tapPosition;
+  //var _tapPosition;
 
-  void _showCustomMenu(Person person, int index) async {
-    final RenderBox overlay = Overlay.of(context).context.findRenderObject();
-    int delta = await showMenu(
-      context: context,
-      position: RelativeRect.fromRect(
-        _tapPosition & Size(20, 20),
-        Offset.zero & overlay.semanticBounds.size,
-      ),
-      items: <PopupMenuEntry<int>>[
-        PopupMenuItem(child: Icon(Icons.edit), value: 1),
-        PopupMenuItem(child: Icon(Icons.delete), value: 2),
-      ],
-    );
-    if (delta == null) {
-      return;
-    }
-    navigateToPage(context, person, delta, index);
-  }
+  // void _showCustomMenu(Person person, int index) async {
+  //   final RenderBox overlay = Overlay.of(context).context.findRenderObject();
+  //   int delta = await showMenu(
+  //     context: context,
+  //     position: RelativeRect.fromRect(
+  //       _tapPosition & Size(20, 20),
+  //       Offset.zero & overlay.semanticBounds.size,
+  //     ),
+  //     items: <PopupMenuEntry<int>>[
+  //       PopupMenuItem(child: Icon(Icons.edit), value: 1),
+  //       PopupMenuItem(child: Icon(Icons.delete), value: 2),
+  //     ],
+  //   );
+  //   if (delta == null) {
+  //     return;
+  //   }
+  //   navigateToPage(context, person, delta, index);
+  // }
 
-  void navigateToPage(
-      BuildContext context, Person person, int value, int index) {
-    if (value == 1) {
-      _navigateToUpdatePerson(context, person);
-    } else {
-      print(index);
-      _deleteNote(context, person, index);
-    }
-  }
+  // void navigateToPage(
+  //     BuildContext context, Person person, int value, int index) {
+  //   if (value == 1) {
+  //     _navigateToUpdatePerson(context, person);
+  //   } else {
+  //     print(index);
+  //     _deleteNote(context, person, index);
+  //   }
+  // }
 
-  void _storePosition(TapDownDetails details) {
-    _tapPosition = details.globalPosition;
+  // void _storePosition(TapDownDetails details) {
+  //   _tapPosition = details.globalPosition;
+  // }
+
+  Future<dynamic> deletePerson(String id) async {
+    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final userid = user.uid;
+    final CollectionReference myCollection = Firestore.instance
+        .collection('users')
+        .document(widget.uid)
+        .collection('person');
+
+    final TransactionHandler deleteTransaction = (Transaction tx) async {
+      final DocumentSnapshot ds = await tx.get(myCollection.document(id));
+
+      await tx.delete(ds.reference);
+      return {'deleted': true};
+    };
+
+    return Firestore.instance
+        .runTransaction(deleteTransaction)
+        .then((result) => result['deleted'])
+        .catchError((error) {
+      print('error: $error');
+      return false;
+    });
   }
 }
