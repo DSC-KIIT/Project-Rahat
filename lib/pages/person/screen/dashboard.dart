@@ -6,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rahat/custom_widgets/google_add.dart';
 import 'package:rahat/model/person.dart';
 import 'package:rahat/pages/person/screen/addPerson.dart';
-import 'package:rahat/pages/person/services/firebase.dart';
 
 class AccountPage extends StatefulWidget {
   AccountPage({this.uid});

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rahat/pages/SOS/routes/disasterFour.dart';
 import 'package:rahat/pages/SOS/routes/disasterOne.dart';
@@ -10,11 +11,34 @@ class SOSPage extends StatefulWidget {
 }
 
 class _SOSPageState extends State<SOSPage> {
+  FirebaseUser user;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   Image appLogo = new Image(
       image: new ExactAssetImage("assets/images/rahatori.png"),
       height: 100.0,
       width: 100.0,
       alignment: FractionalOffset.center);
+
+  
+  getUser() async {
+    FirebaseUser firebaseUser = await _auth.currentUser();
+    await firebaseUser?.reload();
+    firebaseUser = await _auth.currentUser();
+
+    if (firebaseUser != null) {
+      setState(() {
+        this.user = firebaseUser;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this.getUser();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +71,7 @@ class _SOSPageState extends State<SOSPage> {
                           onTap: () {
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
-                              return DisasterOne();
+                              return DisasterOne(uid: user.uid);
                             }));
                           },
                           child: Card(
@@ -77,7 +101,7 @@ class _SOSPageState extends State<SOSPage> {
                           onTap: () {
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
-                              return DisasterTwo();
+                              return DisasterTwo(uid: user.uid);
                             }));
                           },
                           child: Card(
@@ -114,7 +138,7 @@ class _SOSPageState extends State<SOSPage> {
                         onTap: () {
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return DisasterThree();
+                            return DisasterThree(uid: user.uid);
                           }));
                         },
                         child: Card(
@@ -142,7 +166,7 @@ class _SOSPageState extends State<SOSPage> {
                         onTap: () {
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return DisasterFour();
+                            return DisasterFour(uid: user.uid);
                           }));
                         },
                         child: Card(
