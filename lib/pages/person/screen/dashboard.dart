@@ -38,16 +38,6 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   void populatePerson() async {
-//    QuerySnapshot docs = await Firestore.instance.collection("meetings").document(widget.uid).collection("notes").getDocuments();
-//    var documents = docs.documents;
-//    final List<Note> notes = new List();
-//    documents.forEach((element) {
-//      notes.add(Note.fromMap(element.data));
-//      print(element.data);
-//    });
-//    setState(() {
-//      this.items = notes;
-//    });
     notePerson = getPersonList().listen((QuerySnapshot snapshot) {
       final List<Person> notes = snapshot.documents
           .map((documentSnapshot) => Person.fromMap(documentSnapshot.data))
