@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rahat/auth/googleAuth.dart';
+import 'package:rahat/news/newshome.dart';
 import 'package:rahat/pages/NASA/nasaPage.dart';
 import 'package:rahat/pages/SOS/sosPage.dart';
 import 'package:rahat/pages/person/screen/dashboard.dart';
