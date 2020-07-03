@@ -25,7 +25,7 @@ class _DisasterTwoState extends State<DisasterTwo> {
         title: appLogo,
         centerTitle: true,
       ),
-            body: Container(
+      body: Container(
           child: Column(children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(top: 30),

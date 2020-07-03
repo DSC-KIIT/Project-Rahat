@@ -139,11 +139,12 @@ class _HomePageState extends State<HomePage> {
                   ListTile(
                     title: Text("News"),
                     trailing: Icon(FontAwesomeIcons.newspaper),
-                    onTap: () {  Navigator.of(context).push(
+                    onTap: () {
+                      Navigator.of(context).push(
                           MaterialPageRoute(builder: (BuildContext context) {
                         return NEWS();
                       }));
-                              },
+                    },
                   ),
                   ListTile(
                     title: Text('Emergency'),
