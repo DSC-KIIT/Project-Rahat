@@ -5,6 +5,7 @@ import 'package:rahat/auth/googleAuth.dart';
 import 'package:rahat/news/newshome.dart';
 import 'package:rahat/pages/NASA/nasaPage.dart';
 import 'package:rahat/pages/SOS/sosPage.dart';
+import 'package:rahat/pages/emergency.dart';
 import 'package:rahat/pages/person/screen/dashboard.dart';
 import 'package:rahat/weather/weather.dart';
 
