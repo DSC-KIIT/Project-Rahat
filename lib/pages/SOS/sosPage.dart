@@ -6,6 +6,10 @@ import 'package:rahat/pages/SOS/routes/disasterThree.dart';
 import 'package:rahat/pages/SOS/routes/disasterTwo.dart';
 
 class SOSPage extends StatefulWidget {
+  SOSPage({this.uid});
+
+  final String uid;
+
   @override
   _SOSPageState createState() => _SOSPageState();
 }

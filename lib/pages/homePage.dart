@@ -275,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.of(context).push(
                                 new MaterialPageRoute(
                                   builder: (BuildContext context) {
-                                    return SOSPage();
+                                    return SOSPage(uid: user.uid);
                                   },
                                 ),
                               );

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
+import 'package:rahat/model/person.dart';
+
 class DisasterOne extends StatefulWidget {
   DisasterOne({this.uid});
 
@@ -16,6 +18,53 @@ class _DisasterOneState extends State<DisasterOne> {
       height: 100.0,
       width: 100.0,
       alignment: FractionalOffset.center);
+
+    List<Person> items;
+  StreamSubscription<QuerySnapshot> notePerson;
+
+  Stream<QuerySnapshot> getPersonList({int offset, int limit}) {
+    Stream<QuerySnapshot> snapshots = Firestore.instance
+        .collection("users")
+        .document(widget.uid)
+        .collection("person")
+        .getDocuments()
+        .asStream();
+    if (offset != null) {
+      snapshots = snapshots.skip(offset);
+    }
+    if (limit != null) {
+      snapshots = snapshots.take(limit);
+    }
+    return snapshots;
+  }
+
+  void populatePerson() async {
+    notePerson = getPersonList().listen((QuerySnapshot snapshot) {
+      final List<Person> notes = snapshot.documents
+          .map((documentSnapshot) => Person.fromMap(documentSnapshot.data))
+          .toList();
+
+      setState(() {
+        this.items = notes;
+        // print(items);
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    items = new List();
+    notePerson?.cancel();
+    populatePerson();
+  }
+
+  @override
+  void dispose() {
+    notePerson?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
