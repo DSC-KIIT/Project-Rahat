@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:async';
-
-import 'package:rahat/model/person.dart';
 
 class DisasterOne extends StatefulWidget {
   DisasterOne({this.uid});
@@ -13,6 +10,7 @@ class DisasterOne extends StatefulWidget {
 }
 
 class _DisasterOneState extends State<DisasterOne> {
+  bool _isChecked = true;
   Image appLogo = new Image(
       image: new ExactAssetImage("assets/images/rahatori.png"),
       height: 100.0,
@@ -31,48 +29,39 @@ class _DisasterOneState extends State<DisasterOne> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            child: StreamBuilder(
-                stream: Firestore.instance
-                    .collection("users")
-                    .document(widget.uid)
-                    .collection("person")
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  return ListView.builder(
-                      itemCount: snapshot.data.documents.length,
-                      itemBuilder: (context, index) {
-                        DocumentSnapshot details =
-                            snapshot.data.documents[index];
-                        return details == null
-                            ? Center(child: Text("Loading..."))
-                            : GestureDetector(
-                                child: Card(
-                                  color: Colors.black,
-                                  elevation: 3.0,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: ListTile(
+          child: widget.uid == null
+              ? Center(child: Text('Loading...'))
+              : Container(
+                  child: StreamBuilder(
+                      stream: Firestore.instance
+                          .collection("users")
+                          .document(widget.uid)
+                          .collection("person")
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        return ListView.builder(
+                            itemCount: snapshot.data.documents.length,
+                            itemBuilder: (context, index) {
+                              DocumentSnapshot details =
+                                  snapshot.data.documents[index];
+                              return details == null
+                                  ? Center(child: Text("Loading..."))
+                                  : CheckboxListTile(
+                                      value: _isChecked,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          _isChecked = val;
+                                        });
+                                      },
                                       title: Text(
                                         details["name"],
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
+                                            color: Colors.black, fontSize: 20),
                                       ),
-                                      subtitle: Row(
-                                        children: <Widget>[
-                                          Text(details["age"],
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15))
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                      });
-                }),
-          ),
+                                    );
+                            });
+                      }),
+                ),
         ));
   }
 }
