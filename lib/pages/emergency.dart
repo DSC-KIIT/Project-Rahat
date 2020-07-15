@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rahat/pages/homePage.dart';
 
 class EMERGENCY extends StatefulWidget {
   @override
@@ -185,6 +186,15 @@ class _EMERGENCYState extends State<EMERGENCY> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        child: Icon(Icons.arrow_forward),
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+            return HomePage();
+          }));
+        },
       ),
     );
   }

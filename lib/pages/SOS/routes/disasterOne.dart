@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rahat/custom_widgets/google_add.dart';
+import 'package:rahat/pages/SOS/itemPage.dart';
 
 class DisasterOne extends StatefulWidget {
   DisasterOne({this.uid});
@@ -75,7 +75,12 @@ class _DisasterOneState extends State<DisasterOne> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
         child: Icon(Icons.arrow_forward),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
+            return ItemPage();
+          }));
+        },
       ),
     );
   }
