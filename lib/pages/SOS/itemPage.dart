@@ -12,6 +12,7 @@ class _ItemPageState extends State<ItemPage> {
       height: 100.0,
       width: 100.0,
       alignment: FractionalOffset.center);
+  Color _iconColor = Colors.red;
 
   @override
   Widget build(BuildContext context) {
@@ -122,11 +123,101 @@ class _ItemPageState extends State<ItemPage> {
                       child: Text('2'),
                     ),
                   ]),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.15),
+              Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (_iconColor == Colors.red)
+                              _iconColor = Colors.green;
+                            else
+                              _iconColor = Colors.red;
+                          });
+                        },
+                        child: Icon(
+                          Icons.done,
+                          size: 18.0,
+                          color: _iconColor,
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (_iconColor == Colors.red)
+                              _iconColor = Colors.green;
+                            else
+                              _iconColor = Colors.red;
+                          });
+                        },
+                        child: Icon(
+                          Icons.done,
+                          size: 18.0,
+                          color: _iconColor,
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (_iconColor == Colors.red)
+                              _iconColor = Colors.green;
+                            else
+                              _iconColor = Colors.red;
+                          });
+                        },
+                        child: Icon(
+                          Icons.done,
+                          size: 18.0,
+                          color: _iconColor,
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (_iconColor == Colors.red)
+                              _iconColor = Colors.green;
+                            else
+                              _iconColor = Colors.red;
+                          });
+                        },
+                        child: Icon(
+                          Icons.done,
+                          size: 18.0,
+                          color: _iconColor,
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (_iconColor == Colors.red)
+                              _iconColor = Colors.green;
+                            else
+                              _iconColor = Colors.red;
+                          });
+                        },
+                        child: Icon(
+                          Icons.done,
+                          size: 18.0,
+                          color: _iconColor,
+                        )),
+                  )
+                ],
+              )
             ],
           ),
           Divider(thickness: 2),
           Padding(
-            padding: const EdgeInsets.only(left:15.0),
+            padding: const EdgeInsets.only(left: 15.0),
             child: Container(
                 alignment: Alignment.topLeft,
                 child: Text('MEDICAL KIT', style: TextStyle(fontSize: 20))),
@@ -180,16 +271,58 @@ class _ItemPageState extends State<ItemPage> {
                       child: Text('1'),
                     ),
                   ]),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.15),
+              Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (_iconColor == Colors.red)
+                              _iconColor = Colors.green;
+                            else
+                              _iconColor = Colors.red;
+                          });
+                        },
+                        child: Icon(
+                          Icons.done,
+                          size: 18.0,
+                          color: _iconColor,
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (_iconColor == Colors.red)
+                              _iconColor = Colors.green;
+                            else
+                              _iconColor = Colors.red;
+                          });
+                        },
+                        child: Icon(
+                          Icons.done,
+                          size: 18.0,
+                          color: _iconColor,
+                        )),
+                  )
+                ],
+              )
             ],
           ),
-          Divider(thickness: 2.0,)
+          Divider(
+            thickness: 2.0,
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
         child: Icon(Icons.arrow_forward),
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
             return EMERGENCY();
           }));
         },
