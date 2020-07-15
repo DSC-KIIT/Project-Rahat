@@ -26,8 +26,6 @@ class _DisasterOneState extends State<DisasterOne> {
     setState(() => _selectedIndex = index);
   }
 
-  List<DocumentSnapshot> people = <DocumentSnapshot>[];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,36 +53,20 @@ class _DisasterOneState extends State<DisasterOne> {
                           itemBuilder: (context, index) {
                             DocumentSnapshot details =
                                 snapshot.data.documents[index];
-                            for (var i = 1;
-                                i < snapshot.data.documents.length;
-                                i++) people.add(snapshot.data.documents[i]);
                             return details == null
                                 ? Center(child: Text("Loading..."))
-                                // : Container(
-                                //     color: _selectedIndex != null &&
-                                //             _selectedIndex == index
-                                //         ? Colors.red
-                                //         : Colors.white,
-                                //     child: ListTile(
-                                //       title: Text(
-                                //         details["name"],
-                                //         style: TextStyle(color: Colors.black),
-                                //       ),
-                                //       onTap: () => _onSelected(index),
-                                //     ),
-                                //   );
-                                : ListTile(
-                                    onTap: () {
-                                      setState(() {
-                                        people[index].selected =
-                                            !people[index].selected;
-                                      });
-                                    },
-                                    selected: people[index].selected,
-                                    title: Text(details["name"]),
-                                    trailing: (people[index].selected)
-                                        ? Icon(Icons.check_box)
-                                        : Icon(Icons.check_box_outline_blank),
+                                : Container(
+                                    color: _selectedIndex != null &&
+                                            _selectedIndex == index
+                                        ? Colors.red
+                                        : Colors.white,
+                                    child: ListTile(
+                                      title: Text(
+                                        details["name"],
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      onTap: () => _onSelected(index),
+                                    ),
                                   );
                           });
                     }),
@@ -97,8 +79,4 @@ class _DisasterOneState extends State<DisasterOne> {
       ),
     );
   }
-}
-
-class People {
-  bool selected = false;
 }
