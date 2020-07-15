@@ -97,7 +97,79 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: Drawer(
         child: !isSignedIn
-            ? CircularProgressIndicator()
+            ? ListView(
+                children: <Widget>[
+                  UserAccountsDrawerHeader(
+                    accountName: Text(
+                      '${user.displayName}',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                    accountEmail: Text(
+                      '${user.email}',
+                      style: TextStyle(fontSize: 13, color: Colors.white),
+                    ),
+                    decoration: BoxDecoration(color: Color(0xFF183E8D)),
+                    currentAccountPicture: CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        radius: 50,
+                        backgroundImage:
+                            AssetImage("assets/images/mascot.png")),
+                  ),
+                  ListTile(
+                    title: Text("Profile"),
+                    trailing: Icon(FontAwesomeIcons.user),
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(new MaterialPageRoute(builder: (context) {
+                        return AccountPage(uid: user.uid);
+                      }));
+                    },
+                  ),
+                  ListTile(
+                    title: Text("NASA Portal"),
+                    trailing: Icon(FontAwesomeIcons.rocket),
+                    onTap: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return NasaPage();
+                      }));
+                    },
+                  ),
+                  ListTile(
+                    title: Text("News"),
+                    trailing: Icon(FontAwesomeIcons.newspaper),
+                    onTap: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return NEWS();
+                      }));
+                    },
+                  ),
+                  ListTile(
+                    title: Text('Emergency'),
+                    trailing: Icon(FontAwesomeIcons.firstAid),
+                    onTap: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return EMERGENCY();
+                      }));
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Logout"),
+                    trailing: Icon(FontAwesomeIcons.signOutAlt),
+                    onTap: () => signOut(),
+                  ),
+                  Divider(),
+                  ListTile(
+                    title: Text("Close"),
+                    trailing: Icon(Icons.close),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              )
             : ListView(
                 children: <Widget>[
                   UserAccountsDrawerHeader(
