@@ -191,7 +191,7 @@ class _EMERGENCYState extends State<EMERGENCY> {
         backgroundColor: Colors.black,
         child: Icon(Icons.arrow_forward),
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context){
             return HomePage();
           }));
         },
