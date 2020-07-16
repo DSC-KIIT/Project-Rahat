@@ -18,13 +18,7 @@ class _DisasterOneState extends State<DisasterOne> {
       width: 100.0,
       alignment: FractionalOffset.center);
 
-  // ignore: avoid_init_to_null
-  int _selectedIndex = null;
-  bool selected = false;
-
-  _onSelected(int index) {
-    setState(() => _selectedIndex = index);
-  }
+      Color _cardColor = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +49,37 @@ class _DisasterOneState extends State<DisasterOne> {
                                 snapshot.data.documents[index];
                             return details == null
                                 ? Center(child: Text("Loading..."))
-                                : Container(
-                                    color: _selectedIndex != null &&
-                                            _selectedIndex == index
-                                        ? Colors.red
-                                        : Colors.white,
-                                    child: ListTile(
-                                      title: Text(
-                                        details["name"],
-                                        style: TextStyle(color: Colors.black),
+                                : GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      if(_cardColor == Colors.green)
+                                        _cardColor = Colors.black;
+                                      else
+                                        _cardColor = Colors.green;
+                                    });
+                                  },
+                                    child: Card(
+                                      color: _cardColor,
+                                      elevation: 3.0,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: ListTile(
+                                          title: Text(
+                                            details["name"],
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          subtitle: Row(
+                                            children: <Widget>[
+                                              Text(details["age"],
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15))
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                      onTap: () => _onSelected(index),
                                     ),
                                   );
                           });
