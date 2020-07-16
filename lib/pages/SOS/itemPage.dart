@@ -12,7 +12,15 @@ class _ItemPageState extends State<ItemPage> {
       height: 100.0,
       width: 100.0,
       alignment: FractionalOffset.center);
-  Color _iconColor = Colors.red;
+
+  Color _iconColor1 = Colors.red;
+  Color _iconColor2 = Colors.red;
+  Color _iconColor3 = Colors.red;
+  Color _iconColor4 = Colors.red;
+  Color _iconColor5 = Colors.red;
+
+  Color _iconColor6 = Colors.red;
+  Color _iconColor7 = Colors.red;
 
   @override
   Widget build(BuildContext context) {
@@ -131,16 +139,16 @@ class _ItemPageState extends State<ItemPage> {
                     child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            if (_iconColor == Colors.red)
-                              _iconColor = Colors.green;
+                            if (_iconColor1 == Colors.red)
+                              _iconColor1 = Colors.green;
                             else
-                              _iconColor = Colors.red;
+                              _iconColor1 = Colors.red;
                           });
                         },
                         child: Icon(
                           Icons.done,
                           size: 18.0,
-                          color: _iconColor,
+                          color: _iconColor1,
                         )),
                   ),
                   Padding(
@@ -148,16 +156,16 @@ class _ItemPageState extends State<ItemPage> {
                     child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            if (_iconColor == Colors.red)
-                              _iconColor = Colors.green;
+                            if (_iconColor2 == Colors.red)
+                              _iconColor2 = Colors.green;
                             else
-                              _iconColor = Colors.red;
+                              _iconColor2 = Colors.red;
                           });
                         },
                         child: Icon(
                           Icons.done,
                           size: 18.0,
-                          color: _iconColor,
+                          color: _iconColor2,
                         )),
                   ),
                   Padding(
@@ -165,16 +173,16 @@ class _ItemPageState extends State<ItemPage> {
                     child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            if (_iconColor == Colors.red)
-                              _iconColor = Colors.green;
+                            if (_iconColor3 == Colors.red)
+                              _iconColor3 = Colors.green;
                             else
-                              _iconColor = Colors.red;
+                              _iconColor3 = Colors.red;
                           });
                         },
                         child: Icon(
                           Icons.done,
                           size: 18.0,
-                          color: _iconColor,
+                          color: _iconColor3,
                         )),
                   ),
                   Padding(
@@ -182,16 +190,16 @@ class _ItemPageState extends State<ItemPage> {
                     child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            if (_iconColor == Colors.red)
-                              _iconColor = Colors.green;
+                            if (_iconColor4 == Colors.red)
+                              _iconColor4 = Colors.green;
                             else
-                              _iconColor = Colors.red;
+                              _iconColor4 = Colors.red;
                           });
                         },
                         child: Icon(
                           Icons.done,
                           size: 18.0,
-                          color: _iconColor,
+                          color: _iconColor4,
                         )),
                   ),
                   Padding(
@@ -199,16 +207,16 @@ class _ItemPageState extends State<ItemPage> {
                     child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            if (_iconColor == Colors.red)
-                              _iconColor = Colors.green;
+                            if (_iconColor5 == Colors.red)
+                              _iconColor5 = Colors.green;
                             else
-                              _iconColor = Colors.red;
+                              _iconColor5 = Colors.red;
                           });
                         },
                         child: Icon(
                           Icons.done,
                           size: 18.0,
-                          color: _iconColor,
+                          color: _iconColor5,
                         )),
                   )
                 ],
@@ -279,16 +287,16 @@ class _ItemPageState extends State<ItemPage> {
                     child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            if (_iconColor == Colors.red)
-                              _iconColor = Colors.green;
+                            if (_iconColor6 == Colors.red)
+                              _iconColor6 = Colors.green;
                             else
-                              _iconColor = Colors.red;
+                              _iconColor6 = Colors.red;
                           });
                         },
                         child: Icon(
                           Icons.done,
                           size: 18.0,
-                          color: _iconColor,
+                          color: _iconColor6,
                         )),
                   ),
                   Padding(
@@ -296,25 +304,23 @@ class _ItemPageState extends State<ItemPage> {
                     child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            if (_iconColor == Colors.red)
-                              _iconColor = Colors.green;
+                            if (_iconColor7 == Colors.red)
+                              _iconColor7 = Colors.green;
                             else
-                              _iconColor = Colors.red;
+                              _iconColor7 = Colors.red;
                           });
                         },
                         child: Icon(
                           Icons.done,
                           size: 18.0,
-                          color: _iconColor,
+                          color: _iconColor7,
                         )),
                   )
                 ],
               )
             ],
           ),
-          Divider(
-            thickness: 2.0,
-          )
+          Divider(thickness: 2.0)
         ],
       ),
       floatingActionButton: FloatingActionButton(
