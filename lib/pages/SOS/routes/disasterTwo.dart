@@ -16,6 +16,8 @@ class _DisasterTwoState extends State<DisasterTwo> {
       height: 100.0,
       width: 100.0,
       alignment: FractionalOffset.center);
+
+  Color _cardColor = Colors.black;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,47 +30,59 @@ class _DisasterTwoState extends State<DisasterTwo> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          child: StreamBuilder(
-              stream: Firestore.instance
-                  .collection("users")
-                  .document(widget.uid)
-                  .collection("person")
-                  .snapshots(),
-              builder: (context, snapshot) {
-                return ListView.builder(
-                    itemCount: snapshot.data.documents.length,
-                    itemBuilder: (context, index) {
-                      DocumentSnapshot details = snapshot.data.documents[index];
-                      return details == null
-                          ? Center(child: Text("Loading..."))
-                          : GestureDetector(
-                              child: Card(
-                                color: Colors.black,
-                                elevation: 3.0,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: ListTile(
-                                    title: Text(
-                                      details["name"],
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 20),
-                                    ),
-                                    subtitle: Row(
-                                      children: <Widget>[
-                                        Text(details["age"],
+        child: widget.uid == null
+            ? Center(child: Text('Loading...'))
+            : Container(
+                child: StreamBuilder(
+                    stream: Firestore.instance
+                        .collection("users")
+                        .document(widget.uid)
+                        .collection("person")
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      return ListView.builder(
+                          itemCount: snapshot.data.documents.length,
+                          itemBuilder: (context, index) {
+                            DocumentSnapshot details =
+                                snapshot.data.documents[index];
+                            return details == null
+                                ? Center(child: Text("Loading..."))
+                                : GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      if(_cardColor == Colors.green)
+                                        _cardColor = Colors.black;
+                                      else
+                                        _cardColor = Colors.green;
+                                    });
+                                  },
+                                    child: Card(
+                                      color: _cardColor,
+                                      elevation: 3.0,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: ListTile(
+                                          title: Text(
+                                            details["name"],
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 15))
-                                      ],
+                                                fontSize: 20),
+                                          ),
+                                          subtitle: Row(
+                                            children: <Widget>[
+                                              Text(details["age"],
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15))
+                                            ],
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ),
-                            );
-                    });
-              }),
-        ),
+                                  );
+                          });
+                    }),
+              ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
