@@ -12,7 +12,7 @@ class CategoryNews extends StatefulWidget {
 
 class _CategoryNewsState extends State<CategoryNews> {
   List<ArticleModel> articles = new List<ArticleModel>();
-  bool _loading = true;
+  bool _loading = false;
   @override
   void initState() {
     super.initState();
@@ -24,7 +24,7 @@ class _CategoryNewsState extends State<CategoryNews> {
     await newsClass.getNews(widget.category);
     articles = newsClass.news;
     setState(() {
-      _loading = false;
+      _loading = true;
     });
   }
 
@@ -50,31 +50,31 @@ class _CategoryNewsState extends State<CategoryNews> {
               ),
             )
           : SingleChildScrollView(
-                      child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-        children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
               child: Container(
-                child: ListView.builder(
-                  itemCount: articles.length,
-                  physics: ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return BlogTile(
-                      imageUrl: articles[index].urlToImage,
-                      title: articles[index].title,
-                      description: articles[index].description,
-                      url: articles[index].articleUrl,
-                    );
-                  },
-                ),
-              ),
-            )
-        ],
-      )),
-          ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: Container(
+                          child: ListView.builder(
+                            itemCount: articles.length,
+                            physics: ClampingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return BlogTile(
+                                imageUrl: articles[index].urlToImage,
+                                title: articles[index].title,
+                                description: articles[index].description,
+                                url: articles[index].articleUrl,
+                              );
+                            },
+                          ),
+                        ),
+                      )
+                    ],
+                  )),
+            ),
     );
   }
 }
